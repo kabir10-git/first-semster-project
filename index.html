@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NepSaman - Buy & Sell Electronics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <span>Free delivery above Rs. 5,000</span>
+      <span>Verified sellers</span>
+      <span>Simple local marketplace</span>
+    </div>
+  </div>
+
+  <nav class="glass-header">
+    <div class="nav-inner">
+      <div class="logo">
+        <div class="logo-accent"></div>
+        Nep<span class="logo-highlight">Saman</span>
+      </div>
+
+      <div class="search-container">
+        <div class="search-category">
+          <select id="searchCat">
+            <option>All Categories</option>
+            <option>Phones</option>
+            <option>Laptops</option>
+            <option>TVs</option>
+            <option>Audio</option>
+            <option>Cameras</option>
+            <option>Gaming</option>
+          </select>
+        </div>
+        <input type="text" id="searchInput" placeholder="Search products...">
+        <button class="search-btn" onclick="doSearch()" aria-label="Search">Go</button>
+      </div>
+
+      <div class="nav-actions">
+        <button class="action-btn" onclick="openCart()">
+          <span>Cart</span>
+          <span id="cartCount" class="cart-count">0</span>
+        </button>
+        <button class="action-btn">Saved</button>
+        <button class="action-btn" onclick="openLoginModal()">
+          <span id="accountLabel">Sign In</span>
+        </button>
+        <button class="sell-btn" onclick="openSellModal()">Sell Item</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="category-bar">
+    <div class="category-scroll" id="catBar">
+      <div class="category-item active" onclick="filterCat('all',this)">All Products</div>
+      <div class="category-item" onclick="filterCat('Smartphones',this)">Smartphones</div>
+      <div class="category-item" onclick="filterCat('Laptop',this)">Laptops</div>
+      <div class="category-item" onclick="filterCat('TV',this)">TVs</div>
+      <div class="category-item" onclick="filterCat('Audio',this)">Audio</div>
+      <div class="category-item" onclick="filterCat('Camera',this)">Cameras</div>
+      <div class="category-item" onclick="filterCat('Gaming',this)">Gaming</div>
+      <div class="category-item" onclick="filterCat('Accessories',this)">Accessories</div>
+      <div class="category-item" onclick="filterCat('Tablets',this)">Tablets</div>
+    </div>
+  </div>
+
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">BSc CSIT 1st Semester Group Project</div>
+        <h1>Buy and sell <span class="gradient-text">verified electronics</span></h1>
+        <p>A simple electronics marketplace project made by students to practice HTML, CSS and JavaScript with product listing, cart, login and registration features.</p>
+        <div class="hero-stats">
+          <div class="stat-box">
+            <span class="stat-number">12K+</span>
+            <span class="stat-label">Products</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">8K+</span>
+            <span class="stat-label">Users</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number">60%</span>
+            <span class="stat-label">Savings</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h3>Trending Searches</h3>
+        <div class="tag-list">
+          <span class="tag" onclick="searchQuick('iPhone 14 Pro')">iPhone 14 Pro</span>
+          <span class="tag" onclick="searchQuick('M2 MacBook')">M2 MacBook</span>
+          <span class="tag" onclick="searchQuick('Sony FX3')">Sony FX3</span>
+          <span class="tag" onclick="searchQuick('PS5 Pro')">PS5 Pro</span>
+          <span class="tag" onclick="searchQuick('OLED TV')">OLED TV</span>
+          <span class="tag" onclick="searchQuick('iPad Pro')">iPad Pro</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="content-wrapper">
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="trust-icon">VP</div>
+        <div>
+          <h4>Verified Products</h4>
+          <p>Listings are checked before approval.</p>
+        </div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">FP</div>
+        <div>
+          <h4>Fair Pricing</h4>
+          <p>Compare deals at clear market value.</p>
+        </div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">SP</div>
+        <div>
+          <h4>Secure Payments</h4>
+          <p>Buy and sell with safer checkout steps.</p>
+        </div>
+      </div>
+    </div>
+
+    <section class="product-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">
+            <span class="live-dot"></span>
+            Available Products
+          </h2>
+          <p id="listingCount">Loading products...</p>
+        </div>
+
+        <div class="filter-bar" id="filterBar">
+          <span class="filter-chip active" onclick="applyFilter('all',this)">All</span>
+          <span class="filter-chip" onclick="applyFilter('Like New',this)">Like New</span>
+          <span class="filter-chip" onclick="applyFilter('Good',this)">Good</span>
+          <span class="filter-chip" onclick="applyFilter('Fair',this)">Fair</span>
+          <span class="filter-chip" onclick="applyFilter('price-low',this)">Lowest Price</span>
+          <span class="filter-chip" onclick="applyFilter('price-high',this)">Highest Price</span>
+        </div>
+      </div>
+
+      <div id="productGrid" class="product-grid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <div class="logo">Nep<span class="logo-highlight">Saman</span></div>
+        <p>Nepal's simple marketplace for buying and selling electronics.</p>
+      </div>
+      <div>
+        <h4>Marketplace</h4>
+        <ul>
+          <li>Buy Products</li>
+          <li>Sell Products</li>
+          <li>Buyer Protection</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li>Help Center</li>
+          <li>Report Issue</li>
+          <li>Contact Us</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li>About</li>
+          <li>Privacy Policy</li>
+          <li>Terms & Conditions</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>2026 NepSaman</span>
+      <span class="creator-credit">
+        <strong>BSc CSIT 1st Semester Group Project</strong>
+        <small>Created by Kabir Prasai, Abhishek Karki, Anil Chaulagain, Prashant Tirpathi and Partik Thapa</small>
+      </span>
+      <span>Kathmandu, Nepal</span>
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="sellModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Sell Your Product</h3>
+        <button onclick="closeSellModal()" aria-label="Close">x</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Product Name *</label>
+          <input type="text" id="f_name" placeholder="Enter product name">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Category *</label>
+            <select id="f_cat">
+              <option>Smartphones</option>
+              <option>Laptop</option>
+              <option>TV</option>
+              <option>Audio</option>
+              <option>Camera</option>
+              <option>Gaming</option>
+              <option>Accessories</option>
+              <option>Tablets</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Condition *</label>
+            <select id="f_cond">
+              <option>Like New</option>
+              <option>Good</option>
+              <option>Fair</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Price (Rs.) *</label>
+            <input type="number" id="f_price" placeholder="50000">
+          </div>
+          <div class="form-group">
+            <label>Original Price</label>
+            <input type="number" id="f_orig" placeholder="70000">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Seller Name *</label>
+          <input type="text" id="f_seller" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label>Location</label>
+          <input type="text" id="f_loc" placeholder="Kathmandu">
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea id="f_desc" rows="4" placeholder="Describe your product..."></textarea>
+        </div>
+        <button class="primary-btn" onclick="submitListing()">Add Product</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>Shopping Cart</h3>
+      <button onclick="closeCart()" aria-label="Close">x</button>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+    <div id="cartFooter" class="cart-footer" style="display:none;">
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cartTotal">Rs. 0</span>
+      </div>
+      <button class="checkout-btn">Checkout</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="productDetailModal" onclick="closeProductDetails()">
+    <div class="modal product-detail-modal" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3>Product Details</h3>
+        <button onclick="closeProductDetails()" aria-label="Close">x</button>
+      </div>
+      <div class="product-detail-content" id="detailContent"></div>
+    </div>
+  </div>
+
+  <div class="login-overlay" id="loginOverlay" onclick="closeLoginModal()"></div>
+  <div class="login-modal" id="loginModal">
+    <div class="login-close" onclick="closeLoginModal()">x</div>
+    <div class="login-layout">
+      <div class="login-info">
+        <div class="login-badge">Secure Login</div>
+        <h2>Welcome Back</h2>
+        <p>Login to manage products, saved items, and orders.</p>
+        <div class="login-graphic"></div>
+        <div class="demo-login">Demo: <span>demo@nep</span> / <span>demo123</span></div>
+      </div>
+      <div class="login-form">
+        <div class="login-title">
+          <h3 id="authTitle">Sign In</h3>
+          <p id="authSubtitle">Access your account</p>
+        </div>
+        <div class="form-group register-field">
+          <label>Full Name</label>
+          <input id="registerName" type="text" placeholder="Enter full name" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input id="loginEmail" type="text" placeholder="Enter email" autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input id="loginPassword" type="password" placeholder="Enter password" autocomplete="current-password">
+        </div>
+        <label class="remember-box">
+          <input id="loginRemember" type="checkbox" checked>
+          <span>Remember me</span>
+        </label>
+        <button id="authBtn" class="login-btn" onclick="handleAuth()">Login</button>
+        <div class="login-links">
+          <a id="forgotLink" href="#" onclick="showToast('Password reset is unavailable in demo mode.'); return false;">Forgot Password?</a>
+          <span>|</span>
+          <a id="authSwitchLink" href="#" onclick="toggleAuthMode(); return false;">Create Account</a>
+        </div>
+        <div id="loginMsg" class="login-message"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <div class="checkout-modal" id="checkoutModal">
+    <div class="checkout-box">
+      <h2>Checkout</h2>
+      <p id="checkoutAmount"></p>
+      <button onclick="placeOrder()">Confirm Order</button>
+      <button onclick="closeCheckout()">Cancel</button>
+    </div>
+  </div>
+</body>
+</html>
