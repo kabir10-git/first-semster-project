@@ -44,6 +44,7 @@ let searchText = "";
 let toastTimer;
 let authMode = "login";
 let users = [];
+let currentUser = null;
 
 const $ = selector => document.querySelector(selector);
 const $$ = selector => document.querySelectorAll(selector);
@@ -63,7 +64,7 @@ function productImage(product){
 
 function productDetails(category, condition, index){
   const monthsUsed = condition === "Like New" ? 2 + index : condition === "Good" ? 7 + index * 2 : 15 + index * 3;
-  const batteryHealth = ["Smartphones", "Laptop", "Tablets", "Gaming", "Audio", "Accessories"].includes(category)
+  const batteryHealth = ["Smartphones", "Laptop", "Tablets", "Audio"].includes(category)
     ? Math.max(78, condition === "Like New" ? 96 - index : condition === "Good" ? 90 - index * 2 : 84 - index)
     : null;
 
@@ -324,6 +325,68 @@ function closeSellModal(){
   $("#sellModal").classList.remove("open");
 }
 
+function userInitial(name){
+  return (name || "User").trim().charAt(0).toUpperCase();
+}
+
+function createUserProfile(name, email, password = ""){
+  return {
+    name,
+    email,
+    password,
+    phone: "Not added",
+    location: "Kathmandu",
+    joined: "June 2026",
+    payment: "Cash / Online",
+    status: "Verified Buyer",
+    orders: 2,
+    saved: 5,
+    listings: 1
+  };
+}
+
+function updateAccountUI(){
+  const loggedIn = Boolean(currentUser);
+  $("#accountLabel").textContent = loggedIn ? currentUser.name : "Sign In";
+  $("#accountAvatar").textContent = loggedIn ? userInitial(currentUser.name) : "?";
+  $("#accountAvatar").classList.toggle("signed-in", loggedIn);
+}
+
+function openAccountOrLogin(){
+  currentUser ? openAccountModal() : openLoginModal();
+}
+
+function openAccountModal(){
+  if(!currentUser){
+    openLoginModal();
+    return;
+  }
+
+  $("#profileAvatar").textContent = userInitial(currentUser.name);
+  $("#profileName").textContent = currentUser.name;
+  $("#profileEmail").textContent = currentUser.email;
+  $("#profileStatus").textContent = currentUser.status;
+  $("#profileOrders").textContent = currentUser.orders;
+  $("#profileSaved").textContent = currentUser.saved;
+  $("#profileListings").textContent = currentUser.listings;
+  $("#profilePhone").textContent = currentUser.phone;
+  $("#profileLocation").textContent = currentUser.location;
+  $("#profileJoined").textContent = currentUser.joined;
+  $("#profilePayment").textContent = currentUser.payment;
+  $("#accountModal").classList.add("open");
+}
+
+function closeAccountModal(){
+  $("#accountModal").classList.remove("open");
+}
+
+function logoutUser(){
+  currentUser = null;
+  updateAccountUI();
+  closeAccountModal();
+  showToast("Logged out successfully");
+}
+
 function submitListing(){
   const name = $("#f_name").value.trim();
   const price = Number($("#f_price").value);
@@ -388,12 +451,16 @@ function handleLogin(){
   const email = $("#loginEmail").value.trim();
   const password = $("#loginPassword").value;
   const savedUser = users.find(user => user.email === email && user.password === password);
-  const valid = savedUser || (email === "demo@nep" && password === "demo123");
+  const demoUser = email === "demo@nep" && password === "demo123"
+    ? createUserProfile("Demo User", "demo@nep", "demo123")
+    : null;
+  const valid = savedUser || demoUser;
 
   $("#loginMsg").textContent = valid ? "" : "Invalid email or password";
   if(!valid) return;
 
-  $("#accountLabel").textContent = savedUser ? savedUser.name : "My Account";
+  currentUser = savedUser || demoUser;
+  updateAccountUI();
   closeLoginModal();
   showToast("Login successful");
 }
@@ -413,8 +480,9 @@ function registerUser(){
     return;
   }
 
-  users.push({name, email, password});
-  $("#accountLabel").textContent = name;
+  currentUser = createUserProfile(name, email, password);
+  users.push(currentUser);
+  updateAccountUI();
   closeLoginModal();
   showToast("Account created successfully");
 }
@@ -454,6 +522,7 @@ document.addEventListener("DOMContentLoaded", () => {
   createProducts();
   renderProducts();
   updateCart();
+  updateAccountUI();
 
   $("#searchInput").addEventListener("keydown", event => {
     if(event.key === "Enter") doSearch();
