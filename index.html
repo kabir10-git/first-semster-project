@@ -46,7 +46,8 @@
           <span id="cartCount" class="cart-count">0</span>
         </button>
         <button class="action-btn">Saved</button>
-        <button class="action-btn" onclick="openLoginModal()">
+        <button class="action-btn account-action" onclick="openAccountOrLogin()">
+          <span id="accountAvatar" class="mini-avatar">?</span>
           <span id="accountLabel">Sign In</span>
         </button>
         <button class="sell-btn" onclick="openSellModal()">Sell Item</button>
@@ -188,7 +189,7 @@
       <span>2026 NepSaman</span>
       <span class="creator-credit">
         <strong>BSc CSIT 1st Semester Group Project</strong>
-        <small>Created by Kabir Prasai, Abhishek Karki, Anil Chaulagain, Prashant Tirpathi and Partik Thapa</small>
+        <small>Created by Kabir Prasai, Abhishek Karki, Anil Chaulagain, Prashant Tirpathi,Kirtagay Bandari and Partik Thapa</small>
       </span>
       <span>Kathmandu, Nepal</span>
     </div>
@@ -320,6 +321,65 @@
           <a id="authSwitchLink" href="#" onclick="toggleAuthMode(); return false;">Create Account</a>
         </div>
         <div id="loginMsg" class="login-message"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="accountModal" onclick="closeAccountModal()">
+    <div class="modal account-modal" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3>My Account</h3>
+        <button onclick="closeAccountModal()" aria-label="Close">x</button>
+      </div>
+      <div class="account-content">
+        <div class="account-profile">
+          <div id="profileAvatar" class="profile-avatar">U</div>
+          <div>
+            <h2 id="profileName">User</h2>
+            <p id="profileEmail">user@example.com</p>
+            <span id="profileStatus" class="verified-badge">Verified Buyer</span>
+          </div>
+        </div>
+
+        <div class="account-stats">
+          <div>
+            <strong id="profileOrders">0</strong>
+            <span>Orders</span>
+          </div>
+          <div>
+            <strong id="profileSaved">0</strong>
+            <span>Saved</span>
+          </div>
+          <div>
+            <strong id="profileListings">0</strong>
+            <span>Listings</span>
+          </div>
+        </div>
+
+        <div class="account-grid">
+          <div class="account-card">
+            <span>Phone</span>
+            <strong id="profilePhone">Not added</strong>
+          </div>
+          <div class="account-card">
+            <span>Location</span>
+            <strong id="profileLocation">Kathmandu</strong>
+          </div>
+          <div class="account-card">
+            <span>Member Since</span>
+            <strong id="profileJoined">2026</strong>
+          </div>
+          <div class="account-card">
+            <span>Payment</span>
+            <strong id="profilePayment">Cash / Online</strong>
+          </div>
+        </div>
+
+        <div class="account-actions">
+          <button class="primary-btn" onclick="openSellModal(); closeAccountModal();">Sell New Item</button>
+          <button class="ghost-btn" onclick="openCart(); closeAccountModal();">View Cart</button>
+          <button class="danger-btn" onclick="logoutUser()">Logout</button>
+        </div>
       </div>
     </div>
   </div>
