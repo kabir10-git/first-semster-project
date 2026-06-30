@@ -11,7 +11,7 @@
 <body>
   <div class="topbar">
     <div class="topbar-inner">
-      <span>Free delivery above Rs. 5,000</span>
+      <span>Free delivery above Rs. 25,000</span>
       <span>Verified sellers</span>
       <span>Simple local marketplace</span>
     </div>
@@ -107,27 +107,27 @@
 
   <main class="content-wrapper">
     <div class="trust-grid">
-      <div class="trust-card">
+      <button class="trust-card trust-button" onclick="showVerifiedProducts()">
         <div class="trust-icon">VP</div>
         <div>
           <h4>Verified Products</h4>
           <p>Listings are checked before approval.</p>
         </div>
-      </div>
-      <div class="trust-card">
+      </button>
+      <button class="trust-card trust-button" onclick="showFairPricing()">
         <div class="trust-icon">FP</div>
         <div>
           <h4>Fair Pricing</h4>
           <p>Compare deals at clear market value.</p>
         </div>
-      </div>
-      <div class="trust-card">
+      </button>
+      <button class="trust-card trust-button" onclick="showSecurePayment()">
         <div class="trust-icon">SP</div>
         <div>
           <h4>Secure Payments</h4>
           <p>Buy and sell with safer checkout steps.</p>
         </div>
-      </div>
+      </button>
     </div>
 
     <section class="product-section">
@@ -286,13 +286,6 @@
   <div class="login-modal" id="loginModal">
     <div class="login-close" onclick="closeLoginModal()">x</div>
     <div class="login-layout">
-      <div class="login-info">
-        <div class="login-badge">Secure Login</div>
-        <h2>Welcome Back</h2>
-        <p>Login to manage products, saved items, and orders.</p>
-        <div class="login-graphic"></div>
-        <div class="demo-login">Demo: <span>demo@nep</span> / <span>demo123</span></div>
-      </div>
       <div class="login-form">
         <div class="login-title">
           <h3 id="authTitle">Sign In</h3>
@@ -316,7 +309,7 @@
         </label>
         <button id="authBtn" class="login-btn" onclick="handleAuth()">Login</button>
         <div class="login-links">
-          <a id="forgotLink" href="#" onclick="showToast('Password reset is unavailable in demo mode.'); return false;">Forgot Password?</a>
+          <a id="forgotLink" href="#" onclick="showToast('Password reset is not connected yet.'); return false;">Forgot Password?</a>
           <span>|</span>
           <a id="authSwitchLink" href="#" onclick="toggleAuthMode(); return false;">Create Account</a>
         </div>
@@ -380,6 +373,17 @@
           <button class="ghost-btn" onclick="openCart(); closeAccountModal();">View Cart</button>
           <button class="danger-btn" onclick="logoutUser()">Logout</button>
         </div>
+
+        <div class="history-panel">
+          <div>
+            <h3>Buyer History</h3>
+            <div id="buyerHistory" class="history-list"></div>
+          </div>
+          <div>
+            <h3>Seller History</h3>
+            <div id="sellerHistory" class="history-list"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -388,8 +392,16 @@
 
   <div class="checkout-modal" id="checkoutModal">
     <div class="checkout-box">
-      <h2>Checkout</h2>
+      <h2>Secure Payment</h2>
       <p id="checkoutAmount"></p>
+      <div class="form-group">
+        <label>Payment Method</label>
+        <select id="paymentMethod">
+          <option>Cash on Delivery</option>
+          <option>Online Transfer</option>
+          <option>Esewa / Khalti</option>
+        </select>
+      </div>
       <button onclick="placeOrder()">Confirm Order</button>
       <button onclick="closeCheckout()">Cancel</button>
     </div>
