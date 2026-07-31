@@ -412,10 +412,23 @@ function closeProductDetails(){
 function addToCart(id, event){
   if(event) event.stopPropagation();
   const product = products.find(item => item.id === id);
-  const existing = cart.find(item => item.id === id);
 
-  existing ? existing.qty++ : cart.push({...product, qty: 1});
+  if(!product){
+    showToast("This item is no longer available");
+    return;
+  }
+
+  const existing = cart.find(item => item.id === id);
+  if(existing){
+    existing.qty += 1;
+  } else {
+    cart.push({...product, qty: 1});
+  }
+
   updateCart();
+  if($('#cartSidebar').classList.contains('open')){
+    renderCart();
+  }
   showToast(`${product.name} added to cart`);
 }
 
@@ -721,12 +734,6 @@ function registerUser(){
 }
 
 function checkout(){
-  if(!currentUser){
-    openLoginModal();
-    showToast("Please sign in before checkout");
-    return;
-  }
-
   if(!cart.length){
     showToast("Cart is empty");
     return;
@@ -742,13 +749,13 @@ function closeCheckout(){
 }
 
 function placeOrder(){
-  if(!currentUser || !cart.length) return;
+  if(!cart.length) return;
 
   const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
   orders.unshift({
     id: Date.now(),
-    buyerName: currentUser.name,
-    buyerEmail: currentUser.email,
+    buyerName: currentUser ? currentUser.name : "Guest Customer",
+    buyerEmail: currentUser ? currentUser.email : "guest@nepsaman.local",
     date: new Date().toLocaleDateString("en-GB", {year: "numeric", month: "short", day: "numeric"}),
     paymentMethod: $("#paymentMethod").value,
     total,
