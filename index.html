@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- temp change -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -10,148 +9,140 @@
   <script src="script.js" defer></script>
 </head>
 <body>
-  <!-- TOPBAR -->
   <div class="topbar">
-    🎉 Free delivery on verified items above Rs. 5,000 &nbsp;|&nbsp; 100% Buyer Protection &nbsp;|&nbsp; Sell your gadget in 5 minutes
+    <div class="topbar-inner">
+      <span>🎉 Free delivery on verified items above Rs. 5,000</span>
+      <span>100% Buyer Protection</span>
+      <span>Sell your gadget in 5 minutes</span>
+    </div>
   </div>
 
-  <!-- NAVBAR -->
-  <nav>
+  <header class="glass-header">
     <div class="nav-inner">
-      <div class="logo">
-        <span class="logo-icon">🛒</span>Sasto<span>Bazar</span>
-      </div>
+      <a class="logo" href="#">
+        <span class="logo-accent"></span>
+        <span>Sasto<span class="logo-highlight">Bazar</span></span>
+      </a>
 
-      <div class="search-wrap">
+      <div class="search-container">
         <select id="searchCat">
           <option>All</option>
-          <option>Phones</option>
-          <option>Laptops</option>
-          <option>TVs</option>
+          <option>Smartphones</option>
+          <option>Laptop</option>
+          <option>TV</option>
           <option>Audio</option>
-          <option>Cameras</option>
+          <option>Camera</option>
           <option>Gaming</option>
+          <option>Accessories</option>
+          <option>Tablets</option>
         </select>
         <input type="text" id="searchInput" placeholder="Search phones, laptops, TVs, cameras…" />
-        <button onclick="doSearch()">🔍</button>
+        <button class="search-btn" onclick="doSearch()">🔍</button>
       </div>
 
       <div class="nav-actions">
-        <button class="nav-btn" onclick="openCart()">
-          <span class="icon">🛒</span>
+        <button class="action-btn" onclick="openCart()">
+          <span>🛒</span>
           <span>Cart</span>
           <span class="cart-count" id="cartCount">0</span>
         </button>
 
-        <button class="nav-btn">
-          <span class="icon">❤️</span>
-          <span>Wishlist</span>
+        <button class="action-btn" onclick="openAccountOrLogin()">
+          <span id="accountAvatar" class="mini-avatar">?</span>
+          <span id="accountLabel">Sign In</span>
         </button>
 
-        <button class="nav-btn" onclick="openLoginModal()">
-          <span class="icon">👤</span>
-          <span id="accountLabel">Login</span>
-        </button>
-
-        <button class="nav-btn sell-btn" onclick="openSellModal()">+ Sell</button>
+        <button class="sell-btn" onclick="openSellModal()">+ Sell</button>
       </div>
     </div>
-  </nav>
+  </header>
 
-  <!-- CATEGORY BAR -->
-  <div class="cat-bar">
-    <div class="cat-inner" id="catBar">
-      <div class="cat-item active" onclick="filterCat('all',this)"><span class="cat-icon">📦</span>All</div>
-      <div class="cat-item" onclick="filterCat('Smartphones',this)"><span class="cat-icon">📱</span>Phones</div>
-      <div class="cat-item" onclick="filterCat('Laptop',this)"><span class="cat-icon">💻</span>Laptops</div>
-      <div class="cat-item" onclick="filterCat('TV',this)"><span class="cat-icon">📺</span>TVs</div>
-      <div class="cat-item" onclick="filterCat('Audio',this)"><span class="cat-icon">🎧</span>Audio</div>
-      <div class="cat-item" onclick="filterCat('Camera',this)"><span class="cat-icon">📷</span>Cameras</div>
-      <div class="cat-item" onclick="filterCat('Gaming',this)"><span class="cat-icon">🎮</span>Gaming</div>
-      <div class="cat-item" onclick="filterCat('Accessories',this)"><span class="cat-icon">🔌</span>Accessories</div>
-      <div class="cat-item" onclick="filterCat('Tablets',this)"><span class="cat-icon">📱</span>Tablets</div>
+  <div class="category-bar">
+    <div class="category-scroll" id="catBar">
+      <div class="category-item active" onclick="filterCat('all',this)">📦 All</div>
+      <div class="category-item" onclick="filterCat('Smartphones',this)">📱 Phones</div>
+      <div class="category-item" onclick="filterCat('Laptop',this)">💻 Laptops</div>
+      <div class="category-item" onclick="filterCat('TV',this)">📺 TVs</div>
+      <div class="category-item" onclick="filterCat('Audio',this)">🎧 Audio</div>
+      <div class="category-item" onclick="filterCat('Camera',this)">📷 Cameras</div>
+      <div class="category-item" onclick="filterCat('Gaming',this)">🎮 Gaming</div>
+      <div class="category-item" onclick="filterCat('Accessories',this)">🔌 Accessories</div>
+      <div class="category-item" onclick="filterCat('Tablets',this)">📱 Tablets</div>
     </div>
   </div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div>
-        <div class="hero-badge">🇳🇵 Nepal's #1 Second-Hand Electronics Market</div>
-        <h1>Buy & Sell <em>Quality</em><br />Electronics for Less</h1>
-        <p>Find genuine, verified second-hand gadgets at honest prices. From sellers across Nepal — phones, laptops, TVs, cameras & more.</p>
-
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">🇳🇵 Nepal's #1 second-hand electronics marketplace</div>
+        <h1>Buy & Sell Quality Electronics for Less</h1>
+        <p>Find verified gadgets at honest prices across Nepal. From phones and laptops to cameras and consoles, every listing is ready to explore.</p>
         <div class="hero-stats">
-          <div class="stat">
-            <span class="stat-num">12K+</span>
-            <span class="stat-lbl">Products</span>
+          <div class="stat-box">
+            <span class="stat-number">12K+</span>
+            <span class="stat-label">Products</span>
           </div>
-          <div class="stat">
-            <span class="stat-num">8K+</span>
-            <span class="stat-lbl">Sellers</span>
+          <div class="stat-box">
+            <span class="stat-number">8K+</span>
+            <span class="stat-label">Sellers</span>
           </div>
-          <div class="stat">
-            <span class="stat-num">60%</span>
-            <span class="stat-lbl">Avg. Savings</span>
+          <div class="stat-box">
+            <span class="stat-number">60%</span>
+            <span class="stat-label">Avg. Savings</span>
           </div>
         </div>
       </div>
 
       <div class="hero-card">
         <h3>🔥 Trending Searches</h3>
-        <div class="quick-links">
-          <span class="quick-link" onclick="searchQuick('iPhone 13')">iPhone 13</span>
-          <span class="quick-link" onclick="searchQuick('Samsung Galaxy')">Samsung Galaxy</span>
-          <span class="quick-link" onclick="searchQuick('MacBook')">MacBook</span>
-          <span class="quick-link" onclick="searchQuick('Gaming Console')">Gaming Console</span>
-          <span class="quick-link" onclick="searchQuick('AirPods')">AirPods</span>
-          <span class="quick-link" onclick="searchQuick('Canon Camera')">Canon Camera</span>
-          <span class="quick-link" onclick="searchQuick('Smart TV')">Smart TV</span>
-          <span class="quick-link" onclick="searchQuick('iPad')">iPad</span>
+        <div class="tag-list">
+          <span class="tag" onclick="searchQuick('iPhone 13')">iPhone 13</span>
+          <span class="tag" onclick="searchQuick('Samsung Galaxy')">Samsung Galaxy</span>
+          <span class="tag" onclick="searchQuick('MacBook')">MacBook</span>
+          <span class="tag" onclick="searchQuick('Gaming Console')">Gaming Console</span>
+          <span class="tag" onclick="searchQuick('AirPods')">AirPods</span>
+          <span class="tag" onclick="searchQuick('Canon Camera')">Canon Camera</span>
+          <span class="tag" onclick="searchQuick('Smart TV')">Smart TV</span>
+          <span class="tag" onclick="searchQuick('iPad')">iPad</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- MAIN CONTENT -->
-  <main>
-    <!-- BANNERS -->
-    <div class="section">
-      <div class="banner-strip">
-        <div class="banner b1">
-          <div class="banner-icon">✅</div>
-          <div class="banner-text">
-            <h4>100% Verified</h4>
-            <p>Every product checked by our team</p>
-          </div>
+  <main class="content-wrapper">
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="trust-icon">✓</div>
+        <div>
+          <h3>100% Verified</h3>
+          <p>Every product is checked and reviewed before listing.</p>
         </div>
-
-        <div class="banner b2">
-          <div class="banner-icon">💰</div>
-          <div class="banner-text">
-            <h4>Best Prices</h4>
-            <p>Up to 70% off retail price</p>
-          </div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">💰</div>
+        <div>
+          <h3>Best Prices</h3>
+          <p>Find premium devices at prices that feel fair.</p>
         </div>
-
-        <div class="banner b3">
-          <div class="banner-icon">🔒</div>
-          <div class="banner-text">
-            <h4>Buyer Protection</h4>
-            <p>Safe payment & easy returns</p>
-          </div>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">🔒</div>
+        <div>
+          <h3>Buyer Protection</h3>
+          <p>Safe checkout and trusted local delivery options.</p>
         </div>
       </div>
     </div>
 
-    <!-- PRODUCTS -->
-    <div class="section">
+    <section class="product-section">
       <div class="section-header">
-        <h2 class="section-title"><span class="dot"></span> Products Available</h2>
-        <span class="view-all" id="listingCount">Showing all listings</span>
+        <div class="section-title">
+          <span class="live-dot"></span>
+          <h2>Products Available</h2>
+        </div>
+        <span id="listingCount">0 products found</span>
       </div>
 
-      <!-- FILTERS -->
       <div class="filter-bar" id="filterBar">
         <span class="filter-chip active" onclick="applyFilter('all',this)">All Conditions</span>
         <span class="filter-chip" onclick="applyFilter('Like New',this)">Like New</span>
@@ -162,18 +153,16 @@
       </div>
 
       <div class="product-grid" id="productGrid"></div>
-    </div>
+    </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <div class="logo">🛒 Sasto<span>Bazar</span></div>
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h4>Sasto Bazar</h4>
         <p>Nepal's trusted marketplace for quality second-hand electronics. Buy smart, save big, sell easily.</p>
       </div>
-
-      <div class="footer-col">
+      <div>
         <h4>Buy</h4>
         <ul>
           <li>How to Buy</li>
@@ -182,8 +171,7 @@
           <li>Returns & Refunds</li>
         </ul>
       </div>
-
-      <div class="footer-col">
+      <div>
         <h4>Sell</h4>
         <ul>
           <li>Start Selling</li>
@@ -192,8 +180,7 @@
           <li>Verified Badge</li>
         </ul>
       </div>
-
-      <div class="footer-col">
+      <div>
         <h4>Support</h4>
         <ul>
           <li>Help Center</li>
@@ -203,86 +190,76 @@
         </ul>
       </div>
     </div>
-
     <div class="footer-bottom">
       <span>© 2025 Sasto Bazar. All rights reserved.</span>
-      <span>Made with ❤️ in Nepal 🇳🇵</span>
+      <span>Made by  Kabir Prasai, Abhishek Karki, Prashant Tripathi, Pratik Thapa, and Kirtagya Bandari</span>
     </div>
   </footer>
 
-  <!-- SELL MODAL -->
   <div class="modal-overlay" id="sellModal">
     <div class="modal">
       <div class="modal-header">
         <h3 class="modal-title">📤 List Your Product</h3>
         <button class="modal-close" onclick="closeSellModal()">✕</button>
       </div>
-
-      <div class="form-group">
-        <label class="form-label">Product Name *</label>
-        <input class="form-control" id="f_name" placeholder="e.g. iPhone 13 Pro 256GB" />
-      </div>
-
-      <div class="form-row">
+      <div class="modal-body">
         <div class="form-group">
-          <label class="form-label">Category *</label>
-          <select class="form-control" id="f_cat">
-            <option>Smartphones</option>
-            <option>Laptop</option>
-            <option>TV</option>
-            <option>Audio</option>
-            <option>Camera</option>
-            <option>Gaming</option>
-            <option>Accessories</option>
-            <option>Tablets</option>
-          </select>
+          <label class="form-label">Product Name *</label>
+          <input class="form-control" id="f_name" placeholder="e.g. iPhone 13 Pro 256GB" />
         </div>
-
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Category *</label>
+            <select class="form-control" id="f_cat">
+              <option>Smartphones</option>
+              <option>Laptop</option>
+              <option>TV</option>
+              <option>Audio</option>
+              <option>Camera</option>
+              <option>Gaming</option>
+              <option>Accessories</option>
+              <option>Tablets</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Condition *</label>
+            <select class="form-control" id="f_cond">
+              <option>Like New</option>
+              <option>Good</option>
+              <option>Fair</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Asking Price (Rs.) *</label>
+            <input class="form-control" id="f_price" type="number" placeholder="e.g. 35000" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Original Price (Rs.)</label>
+            <input class="form-control" id="f_orig" type="number" placeholder="e.g. 75000" />
+          </div>
+        </div>
         <div class="form-group">
-          <label class="form-label">Condition *</label>
-          <select class="form-control" id="f_cond">
-            <option>Like New</option>
-            <option>Good</option>
-            <option>Fair</option>
-          </select>
+          <label class="form-label">Seller Name *</label>
+          <input class="form-control" id="f_seller" placeholder="Your name" />
         </div>
-      </div>
-
-      <div class="form-row">
         <div class="form-group">
-          <label class="form-label">Asking Price (Rs.) *</label>
-          <input class="form-control" id="f_price" type="number" placeholder="e.g. 35000" />
+          <label class="form-label">Location</label>
+          <input class="form-control" id="f_loc" placeholder="e.g. Kathmandu, Pokhara…" />
         </div>
-
         <div class="form-group">
-          <label class="form-label">Original Price (Rs.)</label>
-          <input class="form-control" id="f_orig" type="number" placeholder="e.g. 75000" />
+          <label class="form-label">Description</label>
+          <textarea class="form-control" id="f_desc" rows="3" placeholder="Describe condition, accessories included, reason for selling…"></textarea>
         </div>
+        <button class="submit-btn" onclick="submitListing()">🚀 List for Sale</button>
       </div>
-
-      <div class="form-group">
-        <label class="form-label">Seller Name *</label>
-        <input class="form-control" id="f_seller" placeholder="Your name" />
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Location</label>
-        <input class="form-control" id="f_loc" placeholder="e.g. Kathmandu, Pokhara…" />
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Description</label>
-        <textarea class="form-control" id="f_desc" rows="3" placeholder="Describe condition, accessories included, reason for selling…"></textarea>
-      </div>
-
-      <button class="submit-btn" onclick="submitListing()">🚀 List for Sale</button>
     </div>
   </div>
 
-  <!-- CART OVERLAY + SIDEBAR -->
   <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
-  <div class="cart-sidebar" id="cartSidebar">
-    <div class="cart-head">
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
       <h3>🛒 Your Cart</h3>
       <button class="modal-close" onclick="closeCart()">✕</button>
     </div>
@@ -292,90 +269,133 @@
         <span>Total</span>
         <span id="cartTotal">Rs. 0</span>
       </div>
-      <button class="checkout-btn">✅ Proceed to Checkout</button>
+      <button class="checkout-btn" onclick="checkout()">✅ Proceed to Checkout</button>
     </div>
-  </div>
+  </aside>
 
-  <!-- LOGIN MODAL -->
   <div class="login-overlay" id="loginOverlay" onclick="closeLoginModal()"></div>
   <div class="login-modal" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginTitle" tabindex="-1">
     <div class="login-close" onclick="closeLoginModal()" aria-label="Close">✕</div>
-
-    <div class="login-grid">
+    <div class="login-layout">
       <div class="login-hero">
         <div class="login-badge">🔒 Secure Login</div>
         <h2 id="loginTitle">Welcome back</h2>
         <p>Sign in to manage listings, cart, and orders.</p>
-
-        <div class="login-illustration" aria-hidden="true">
-          <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#7C3AED" />
-                <stop offset="0.55" stop-color="#1D4ED8" />
-                <stop offset="1" stop-color="#F59E0B" />
-              </linearGradient>
-              <filter id="blur" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="14" />
-              </filter>
-            </defs>
-
-            <rect x="0" y="0" width="520" height="320" rx="22" fill="rgba(255,255,255,0.06)" />
-            <circle cx="110" cy="80" r="55" fill="url(#g)" filter="url(#blur)" />
-            <circle cx="380" cy="95" r="65" fill="url(#g)" filter="url(#blur)" />
-            <circle cx="300" cy="230" r="80" fill="url(#g)" filter="url(#blur)" />
-            <path d="M70 250 C120 190, 190 190, 240 250 S340 310, 450 240" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="3" stroke-linecap="round" />
-
-            <g opacity="0.9">
-              <rect x="135" y="130" width="250" height="120" rx="16" fill="rgba(15, 23, 42, 0.35)" stroke="rgba(255,255,255,0.2)" />
-              <rect x="160" y="155" width="200" height="18" rx="9" fill="rgba(255,255,255,0.18)" />
-              <rect x="160" y="180" width="140" height="14" rx="7" fill="rgba(255,255,255,0.14)" />
-              <rect x="160" y="205" width="175" height="14" rx="7" fill="rgba(255,255,255,0.14)" />
-              <circle cx="370" cy="205" r="12" fill="#F59E0B" />
-            </g>
-          </svg>
-        </div>
-
-        <div class="login-foot">
-          Try demo: <span class="kbd">demo@nep</span> / <span class="kbd">demo123</span>
-        </div>
       </div>
-
       <div class="login-form">
         <div class="login-head">
-          <div class="login-title">Sign in</div>
-          <div class="login-sub">Fast, secure, and modern</div>
+          <div class="login-title" id="authTitle">Sign in</div>
+          <div class="login-sub" id="authSubtitle">Fast, secure, and modern</div>
         </div>
-
+        <div class="login-group register-field">
+          <label>Name</label>
+          <input id="registerName" type="text" placeholder="Your full name" />
+        </div>
         <div class="login-group">
           <label>Email or phone</label>
-          <input id="loginEmail" type="text" placeholder="demo@nep or 98XXXXXXXX" autocomplete="username" />
+          <input id="loginEmail" type="text" placeholder="you@example.com" autocomplete="username" />
         </div>
-
         <div class="login-group">
           <label>Password</label>
           <input id="loginPassword" type="password" placeholder="Your password" autocomplete="current-password" />
         </div>
-
         <label class="login-remember">
           <input id="loginRemember" type="checkbox" checked />
           <span>Remember me</span>
         </label>
-
-        <button class="login-btn" onclick="handleLogin()">Login</button>
-
+        <button class="login-btn" id="authBtn" onclick="handleAuth()">Login</button>
         <div class="login-links">
-          <a href="#" onclick="showToast('Use demo credentials ❤️')">Forgot password?</a>
+          <a href="#" id="forgotLink" onclick="showToast('Password reset will be available soon')">Forgot password?</a>
           <span class="sep">|</span>
-          <a href="#" onclick="showToast('Demo only: signup not implemented')">Create account</a>
+          <a href="#" id="authSwitchLink" onclick="toggleAuthMode()">Create account</a>
         </div>
-
         <div class="login-msg" id="loginMsg"></div>
       </div>
     </div>
   </div>
 
-  <!-- TOAST -->
+  <div class="modal-overlay" id="productDetailModal">
+    <div class="modal product-detail-modal">
+      <div class="modal-header">
+        <h3 class="modal-title">Product Details</h3>
+        <button class="modal-close" onclick="closeProductDetails()">✕</button>
+      </div>
+      <div class="product-detail-content" id="detailContent"></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="accountModal">
+    <div class="modal account-modal">
+      <div class="modal-header">
+        <h3 class="modal-title">My Account</h3>
+        <button class="modal-close" onclick="closeAccountModal()">✕</button>
+      </div>
+      <div class="account-content">
+        <div class="account-profile">
+          <div class="profile-avatar" id="profileAvatar">?</div>
+          <div>
+            <h2 id="profileName">Guest</h2>
+            <p id="profileEmail">guest@example.com</p>
+            <span class="verified-badge" id="profileStatus">Verified Buyer</span>
+          </div>
+        </div>
+        <div class="account-stats">
+          <div><strong id="profileOrders">0</strong><span>Orders</span></div>
+          <div><strong id="profileSaved">0</strong><span>Saved</span></div>
+          <div><strong id="profileListings">0</strong><span>Listings</span></div>
+        </div>
+        <div class="account-grid">
+          <div class="account-card">
+            <strong>Phone</strong>
+            <span id="profilePhone">Not added</span>
+          </div>
+          <div class="account-card">
+            <strong>Location</strong>
+            <span id="profileLocation">Kathmandu</span>
+          </div>
+          <div class="account-card">
+            <strong>Joined</strong>
+            <span id="profileJoined">June 2026</span>
+          </div>
+          <div class="account-card">
+            <strong>Payment</strong>
+            <span id="profilePayment">Cash / Online</span>
+          </div>
+        </div>
+        <div class="account-actions">
+          <button class="ghost-btn" onclick="logoutUser()">Log Out</button>
+        </div>
+        <div class="history-panel">
+          <h3>Buyer History</h3>
+          <div class="history-list" id="buyerHistory"></div>
+        </div>
+        <div class="history-panel">
+          <h3>Seller History</h3>
+          <div class="history-list" id="sellerHistory"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="checkout-modal" id="checkoutModal">
+    <div class="checkout-box">
+      <h3>Checkout</h3>
+      <p id="checkoutAmount">Total: Rs. 0</p>
+      <div class="form-group">
+        <label class="form-label">Payment Method</label>
+        <select class="form-control" id="paymentMethod">
+          <option>Cash on delivery</option>
+          <option>Esewa</option>
+          <option>Bank transfer</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <button class="checkout-btn" onclick="placeOrder()">Place Order</button>
+        <button class="action-btn" onclick="closeCheckout()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
 </body>
 </html>
